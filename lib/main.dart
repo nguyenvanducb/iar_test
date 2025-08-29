@@ -82,3 +82,42 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+/*
+1. @collection
+Đây là annotation của Isar, đánh dấu class này là một collection trong cơ sở dữ liệu Isar.
+Khi bạn chạy build runner (flutter pub run build_runner build), Isar sẽ tạo ra mã code hỗ trợ CRUD (create, read, update, delete) cho collection này.
+
+2. class Email
+Đây là lớp Dart định nghĩa dữ liệu của email, với các thuộc tính: id, title, recipients, status.
+Mỗi instance của Email sẽ là một document trong collection emails của Isar.
+
+3. Id id = Isar.autoIncrement;
+Id là kiểu định danh duy nhất mà Isar sử dụng cho mỗi document.
+Isar.autoIncrement nghĩa là Isar sẽ tự động cấp ID tăng dần khi bạn thêm document mới.
+Bạn cũng có thể dùng id = null để auto-increment.
+Đây là primary key của document, bắt buộc phải có trong Isar collection.
+
+4. @Index(type: IndexType.value)
+@Index là annotation tạo chỉ mục (index) trên trường này.
+type: IndexType.value nghĩa là lưu index theo giá trị, giúp tìm kiếm nhanh hơn khi lọc theo title.
+String? title nghĩa là title có thể null, kiểu dữ liệu String.
+
+5. List<Recipient>? recipients;
+Đây là danh sách các đối tượng nhúng (embedded objects) trong email.
+Recipient là class đánh dấu bằng @embedded, nghĩa là dữ liệu nhúng trong document Email, không tạo collection riêng.
+List<Recipient>? cho phép email có 0 hoặc nhiều người nhận.
+
+6. @enumerated
+@enumerated cho Isar biết trường này là enum.
+Isar sẽ lưu enum dưới dạng số nguyên (int) tương ứng với vị trí trong enum.
+Status status = Status.pending; nghĩa là giá trị mặc định của status là pending.
+
+7. Tóm tắt logic:
+Email = document trong Isar.
+id = primary key tự tăng.
+title = có index, dùng để tìm kiếm nhanh.
+recipients = danh sách đối tượng nhúng.
+status = enum, có giá trị mặc định.
+*/
