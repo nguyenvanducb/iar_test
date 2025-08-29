@@ -120,4 +120,7 @@ id = primary key tự tăng.
 title = có index, dùng để tìm kiếm nhanh.
 recipients = danh sách đối tượng nhúng.
 status = enum, có giá trị mặc định.
+
+dart run build_runner build
+
 */
